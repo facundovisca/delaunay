@@ -1,0 +1,569 @@
+/* ==========================================================================
+   1. RESET GENERAL Y ESTILOS DE BASE
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #f0ede6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ==========================================================================
+   2. ESTRUCTURA Y DIRECCIONAMIENTO DEL LAYOUT
+   ========================================================================== */
+#app-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background-color: #242424;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  position: relative; /* para pseudo-elementos decorativos */
+}
+
+/* Decoración minimalista para el área del lienzo (subtil, detrás del contenido) */
+
+/* Asegurar que el contenido interno se renderiza por encima de las decoraciones */
+#app-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+#main-header {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+#main-header h2 {
+  font-size: 28px;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.conceptual-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #a0a0a0;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+
+.conceptual-text strong {
+  color: #c4a85a;
+  font-weight: 600;
+}
+
+#main-content-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 30px;
+  width: 100%;
+}
+
+/* Columna que contiene el Lienzo y su manual inferior */
+.canvas-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  width: 600px; /* Sincronizado con el ancho del canvas */
+}
+
+/* Decoraciones cromáticas y minimalistas alrededor/detrás del lienzo */
+#canvas-holder {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Delicada trama diagonal sutil sobre el lienzo (muy baja opacidad) */
+/* Removed decorative pseudo-elements for #app-container and #canvas-holder
+   to keep only the welcome-screen decorations as requested. */
+
+/* Asegurar que el canvas se renderiza por encima del ::before y debajo del ::after */
+#canvas-holder > canvas { position: relative; z-index: 1; display: block; }
+
+@media (max-width: 1000px) {
+  #main-content-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+  .canvas-column {
+    width: 100%;
+    max-width: 600px;
+  }
+}
+
+/* ==========================================================================
+   3. ELEMENTOS DEL LIENZO (P5.JS CANVAS RESPONSIVO)
+   ========================================================================== */
+#canvas-holder canvas {
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  display: block;
+  max-width: 100%;
+  height: auto !important; 
+}
+
+/* ==========================================================================
+   4. PANEL DE CONTROL LATERAL (GUI)
+   ========================================================================== */
+#gui-panel {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #1c1c1c;
+  padding: 22px;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+#gui-panel h3 {
+  font-size: 14px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #222;
+  padding-bottom: 8px;
+}
+
+.control-group {
+  margin-bottom: 14px;
+}
+
+.control-group label {
+  display: block;
+  font-size: 10px;
+  color: #c4a85a;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: #333;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fe3f2c;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   5. COMPONENTES: BOTONES DE ACCIÓN SIMÉTRICOS
+   ========================================================================== */
+.action-buttons-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.action-buttons-row button {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+#btnGenerar {
+  background-color: #c4a85a;
+  color: #111;
+  border: none;
+}
+
+#btnGenerar:hover {
+  background-color: #e5c46e;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #444444;
+}
+
+.btn-outline:hover {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   6. MUESTRA CROMÁTICA (PREVIEW DE PALETAS)
+   ========================================================================== */
+#palette-bar-container {
+  margin-top: 25px;
+  width: 100%;
+  height: 22px;
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.color-swatch {
+  flex: 1;
+  height: 100%;
+  transition: background-color 0.2s ease;
+}
+
+/* ==========================================================================
+   7. PANTALLA DE BIENVENIDA INTERACTIVA (SPLASH SCREEN)
+   ========================================================================== */
+#welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(17, 17, 17, 0.92);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* Decoración minimalista para la pantalla de bienvenida: círculos y franja diagonal */
+#welcome-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 18% 22%, rgba(196,168,90,0.12) 0%, rgba(196,168,90,0.08) 10%, transparent 30%),
+    radial-gradient(circle at 82% 78%, rgba(79,116,209,0.10) 0%, rgba(79,116,209,0.06) 12%, transparent 35%),
+    radial-gradient(circle at 50% 10%, rgba(254,63,44,0.06) 0%, transparent 22%),
+    linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.00) 30%, rgba(255,255,255,0.00) 70%, rgba(255,255,255,0.04) 100%);
+  mix-blend-mode: normal;
+  z-index: 2;
+}
+
+#welcome-screen::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%) rotate(12deg);
+  background: conic-gradient(from 200deg at 50% 50%, rgba(196,168,90,0.06), rgba(79,116,209,0.04), rgba(254,63,44,0.03), rgba(196,168,90,0.06));
+  border-radius: 18px;
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.welcome-content h2 {
+  font-size: 32px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.welcome-intro {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #b0b0b0;
+  margin-bottom: 25px;
+}
+
+.welcome-intro strong {
+  color: #c4a85a;
+}
+
+.welcome-guide-box span {
+  color: #c4a85a;
+  font-weight: bold;
+}
+
+#btnComenzarPerfo {
+  background-color: #fe3f2c;
+  color: #ffffff;
+  border: none;
+  padding: 15px 40px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+#btnComenzarPerfo:hover {
+  background-color: #ff5747;
+  transform: scale(1.01);
+  box-shadow: 0 4px 15px rgba(254, 63, 44, 0.4);
+}
+
+#welcome-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ==========================================================================
+   8. NUEVO: MANUAL DE PERFORMANCE HORIZONTAL (MÓDULO DEBAJO DEL CANVAS)
+   ========================================================================== */
+#performance-manual-horizontal {
+  background-color: #1c1c1c;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 18px;
+  width: 100%;
+}
+
+.manual-title {
+  display: block;
+  font-size: 11px;
+  color: #888;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed #333;
+  padding-bottom: 6px;
+  font-weight: bold;
+}
+
+/* Grilla de 4 columnas perfectas para los comandos principales */
+.manual-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .manual-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.manual-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tag-badge {
+  font-size: 10px;
+  color: #ffffff;
+  background-color: #2e2e2e;
+  padding: 3px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.manual-item p {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #c4a85a;
+}
+
+/* Fila inferior para los controles de teclado secundarios */
+.manual-footer-keys {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #252525;
+  font-size: 10px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.key-pill {
+  color: #fff;
+  background-color: #333;
+}
+
+
+/* 1. Expandimos el ancho del cuadro de contenido para dar más espacio horizontal */
+.welcome-content {
+  width: 90%;
+  max-width: 800px; /* 🔥 CAMBIO: Antes solía ser de 500px o 600px. Al estirarlo a 800px, el texto "respira" */
+  background: #111111;
+  padding: 30px 40px;
+  border-radius: 12px;
+  border: 1px solid #222;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  text-align: center;
+  position: relative;
+  z-index: 3; /* asegurar que el contenido está por encima de las decoraciones */
+}
+
+/* 2. Removemos el límite de altura rígido y el scroll del cuadro de instrucciones */
+.welcome-guide-box {
+  max-height: none !important; /* 🔥 CAMBIO: Eliminamos el techo de altura */
+  overflow-y: visible !important; /* 🔥 CAMBIO: Forzamos a que desaparezca la barra de scroll */
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  background: #161616;
+  padding: 20px 25px;
+  border-radius: 6px;
+  border: 1px solid #222;
+}
+
+/* 3. Ajustamos el interlineado y márgenes de las listas para compactar el alto general */
+.welcome-guide-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.welcome-guide-box li {
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 10px; /* 🔥 CAMBIO: Un pelín más compacto para asegurar que no toque los bordes del monitor */
+  color: #ccc;
+}
+
+.welcome-guide-box h3 {
+  font-size: 14px;
+  color: #c4a85a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+/* ==========================================================================
+   9. AJUSTE RESPONSIVO CRÍTICO PARA PANTALLA DE BIENVENIDA (MÓVIL / IOS)
+   ========================================================================== */
+@media (max-width: 600px) {
+  #welcome-screen {
+    position: absolute !important;     /* 🔥 CAMBIO CLAVE: Permite que el fondo acompañe el scroll real del iPhone */
+    height: auto !important;           /* 🔥 CAMBIO CLAVE: Rompe el bloqueo rígido de pantalla del vh */
+    min-height: 100vh !important;
+    align-items: flex-start !important; 
+    overflow-y: initial !important;    /* Le delegamos el scroll al cuerpo general de la página */
+    padding: 10px !important;
+  }
+
+  .welcome-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 15px 15px !important;    
+    margin: 10px 0 20px 0 !important;  /* Le damos un aire abajo para que el botón respire en Safari */
+  }
+
+  .welcome-content h2 {
+    font-size: 22px !important;       
+    margin-bottom: 8px !important;
+  }
+
+  .welcome-intro {
+    font-size: 12px !important;       
+    line-height: 1.4 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .welcome-guide-box {
+    padding: 12px 15px !important;    
+    margin-top: 10px !important;
+    margin-bottom: 15px !important;
+  }
+
+  .welcome-guide-box h3 {
+    font-size: 12px !important;
+    margin-top: 8px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .welcome-guide-box li {
+    font-size: 11px !important;       
+    line-height: 1.4 !important;
+    margin-bottom: 6px !important;
+  }
+
+  #btnComenzarPerfo {
+    padding: 14px 20px !important;    /* Un toque más gordo para que sea fácil de clavar con el pulgar */
+    font-size: 13px !important;
+    margin-top: 5px !important;
+  }
+}
+
+/* ==========================================================================
+   10. BOTÓN TOGGLE MICRÓFONO (ESTILOS REFORZADOS)
+   ========================================================================== */
+#btnToggleMic {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Estado Encendido: Fondo Verde */
+#btnToggleMic.mic-active {
+  background-color: #2e7d32 !important;
+  color: #ffffff !important;
+}
+#btnToggleMic.mic-active:hover {
+  background-color: #388e3c !important;
+}
+
+/* Estado Muteado: Fondo Rojo Alerta */
+#btnToggleMic.mic-muted {
+  background-color: #c62828 !important; /* 🔥 Rojo sólido e indiscutible */
+  color: #ffffff !important;
+  animation: pulse-mute 2s infinite;
+}
+#btnToggleMic.mic-muted:hover {
+  background-color: #d32f2f !important;
+}
+
+@keyframes pulse-mute {
+  0% { opacity: 1; }
+  50% { opacity: 0.85; }
+  100% { opacity: 1; }
+}
