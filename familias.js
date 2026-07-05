@@ -412,8 +412,6 @@ class FamiliaAzar {
       }
     }
 
-    
-
     // Capa 3: Dibujo de las estructuras internas de cada núcleo
     nodosActivos.forEach((n) => {
       let diametroD3 = n.d1 * 0.3;

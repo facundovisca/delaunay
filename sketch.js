@@ -2,7 +2,7 @@
 // 1. VARIABLES GLOBALES Y CONFIGURACIÓN
 // ==========================================================================
 
-// Estructuras de la obra artística
+// Estructuras de la obra
 let obra;
 let texturas = [];
 let texturaElegida;
@@ -159,7 +159,7 @@ let flagGatillarCaptura = false;
 let contadorSilencioActivo = false;
 
 // ==========================================================================
-// 2. CICLO DE VIDA PRINCIPAL (P5.JS)
+// 2. CICLO PRINCIPAL (P5.JS)
 // ==========================================================================
 
 function preload() {
@@ -554,7 +554,7 @@ function modularConPitchYVolumen(factorCambio) {
       break;
     case 6:
       valoresPerformaticos.sinusoide = constrain(
-        valoresPerformaticos.sinusoide + factorCambio * 2.5,
+        valoresPerformaticos.sinusoide + factorCambio * 4.5,
         0,
         100,
       );
@@ -845,9 +845,9 @@ function dibujarMonitorDatos() {
   textStyle(BOLD);
   text(monitor_cached_msgModo, 25, 56);
 
-  // VU meter: dibujarlo justo debajo de la línea de intensidad para aprovechar el espacio
+  // VU meter
   let vuX = 25;
-  let vuY = 40; // debajo de la intensidad (separación aumentada)
+  let vuY = 40; // alto del vumetro
   let vuW = 150; // ancho del vumetro
   fill(50);
   noStroke();

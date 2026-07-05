@@ -340,6 +340,26 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0 4px 15px rgba(254, 63, 44, 0.4);
 }
 
+.site-footer {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.site-footer p {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #8a8a8a;
+  letter-spacing: 0.3px;
+}
+
+.site-footer--app {
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 14px;
+}
+
 #welcome-screen.hidden {
   opacity: 0;
   visibility: hidden;
